@@ -23,8 +23,15 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-    
-    <!-- Required: set your sentry.io project identifier (DSN) -->
+        <service
+            android:name=".features.notification.data.service.FirebaseService"
+            android:exported="false">
+            <intent-filter>
+                <action android:name="com.google.firebase.MESSAGING_EVENT" />
+            </intent-filter>
+        </service>
+
+        <!-- Required: set your sentry.io project identifier (DSN) -->
     <meta-data android:name="io.sentry.dsn" android:value="https://d87c8fc0ee70f819bbdbde3fc472c337@o4509891692986368.ingest.us.sentry.io/4510032860151808" />
 
     <!-- enable automatic breadcrumbs for user interactions (clicks, swipes, scrolls) -->
@@ -36,6 +43,16 @@
 
     <!-- enable the performance API by setting a sample-rate, adjust in production env -->
     <meta-data android:name="io.sentry.traces.sample-rate" android:value="1.0" />
-</application>
+
+        <meta-data
+            android:name="com.google.firebase.messaging.default_notification_icon"
+            android:resource="@drawable/ic_stat_ic_notification" />
+        <!-- Set color used with incoming notification messages. This is used when no color is set for the incoming
+             notification message. See README(https://goo.gl/6BKBk7) for more. -->
+        <meta-data
+            android:name="com.google.firebase.messaging.default_notification_color"
+            android:resource="@color/colorAccent" />
+
+    </application>
 
 </manifest>
